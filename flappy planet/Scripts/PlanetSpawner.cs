@@ -1,13 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class PlanetSpawner : MonoBehaviour
 {
-    
     public float spawnRate = 1f;
-    public float minHeight = -3f;
-    public float maxHeight = 3f;
-
-   
+    public float minAltura = -2f;
+    public float maxAltura = 2f;
 
     [System.Serializable]
     public struct spawnObj
@@ -16,9 +13,9 @@ public class Spawner : MonoBehaviour
         [Range(0f,1f)]
         public float spawnChance;
     }
-    public spawnObj[] objects;
+    public spawnObj[] objetos;
 
-    private void OnEnable()
+    public void OnEnable()
     {
         InvokeRepeating(nameof(Spawn), spawnRate, spawnRate);
     }
@@ -31,15 +28,14 @@ public class Spawner : MonoBehaviour
     private void Spawn()
     {
         float spawnChance = Random.value;
-        foreach (var obj in objects){
+        foreach (var obj in objetos){
             if (spawnChance < obj.spawnChance){
-                GameObject pipes = Instantiate(obj.prefab, transform.position, Quaternion.identity);
-                pipes.transform.position += Vector3.up * Random.Range(minHeight, maxHeight);
+                GameObject planetas = Instantiate(obj.prefab, transform.position, Quaternion.identity);
+                planetas.transform.position += Vector3.up * Random.Range(minAltura, maxAltura);
                 break;
             }
             spawnChance -= obj.spawnChance; // n spawnam uns em cima dos outros
         }
         
     }
-
 }
