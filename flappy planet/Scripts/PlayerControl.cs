@@ -62,8 +62,7 @@ public class PlayerControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Obstaculo")) {
-            FindObjectOfType<Parallax>().Reiniciar();
+        if (other.gameObject.CompareTag("Obstaculo")) 
             FindObjectOfType<GameManager>().JogoAcaba();
         } else if (other.gameObject.CompareTag("Passou")) {
             FindObjectOfType<GameManager>().AumentaResultado();
